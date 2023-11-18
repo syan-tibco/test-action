@@ -3,10 +3,10 @@
 on:
   workflow_dispatch:
     inputs:
-      tagName:
-        description: 'test go action'
+      path:
+        description: 'main.go file path'
         required: false
-        default: 'production'
+        default: 'main.go'
 
 jobs:
   build:
@@ -16,4 +16,6 @@ jobs:
       - uses: actions/setup-go@v4
         with:
           go-version: '1.21.4' # The Go version to download (if necessary) and use.
-      - run: go version
+      - run: | 
+          go version
+          go run ${{ github.event.inputs.path }}
