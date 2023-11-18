@@ -1,4 +1,4 @@
-
+name: go-action
 
 on:
   workflow_dispatch:
@@ -12,10 +12,17 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-go@v4
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v4
         with:
           go-version: '1.21.4' # The Go version to download (if necessary) and use.
-      - run: | 
+
+      - name: Run Go
+        run: | 
           go version
           go run ${{ github.event.inputs.path }}
