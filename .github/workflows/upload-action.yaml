@@ -27,4 +27,4 @@ jobs:
         with:
           artifacts: "release.tar.gz,foo/*.txt"
           body: "this is a new release"
-          tag: ${{ github.event.inputs.path }}
+          tag: ${{ github.event.inputs.tag }}
