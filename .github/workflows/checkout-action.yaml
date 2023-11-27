@@ -1,0 +1,26 @@
+name: checkout-action
+
+on:
+  workflow_dispatch:
+    inputs:
+      tagName:
+        description: 'The promoted image tag name'
+        required: true
+        default: ''
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Go
+        run: |
+          echo "working on branch ${GITHUB_REF##*/}"
+          echo "inputs: ${{ github.event.inputs.tagName }}"
+          echo "env: ${{ env.REGISTRY }}"
+          echo "inputs: ${{ github.event.inputs }}"
+          git status 
